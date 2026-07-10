@@ -15,19 +15,25 @@ typedef vector<pii> vpii;
 #define se second
 
 int main(){   
-    int d ; ll n;
+    int d ; string n;
     
-    while ((cin >> d >> n) && (d != 0 && n != 0)){
+    while ((cin >> d >> n)){
+            if(d == 0 && n == "0") break;
             char x = d + '0';
-            cout << "valor de x(char de d): " << x << endl;
-            string y; y = to_string(n);
-            cout << "valor de y(string de n): " << y << endl;
-            y.erase(remove(y.begin(), y.end(), x), y.end());
-
-            cout << "tam : " << y.length() << endl;
-            if(y.length() == 0) y = '0';
-            cout << "resposta: " << y << endl;
+            string y;
             
+            for(char c : n){
+                if(c != x) y += c;
+            }
+
+            int i = 0;
+            while(i + 1 < (int)y.size() && y[i] == '0') i+= 1;
+
+            y = y.substr(i);
+            if(y.empty()) y = "0";
+            
+            cout << y << endl;
+
     }
     return 0;
 }
